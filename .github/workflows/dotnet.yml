@@ -28,11 +28,21 @@ jobs:
       run: dotnet test --no-build --verbosity normal
     - name: Publish
       run: |
-        dotnet publish CSharpActionsTest/CSharpActionsTest.csproj -c Release -o release --nologo --self-contained -r win-x64
-        dotnet publish CSharpActionsTest/CSharpActionsTest.csproj -c Release -o release --nologo --self-contained -r linux-x64
-        dotnet publish CSharpActionsTest/CSharpActionsTest.csproj -c Release -o release --nologo --self-contained -r osx-x64
-    - name: Upload build
+        dotnet publish CSharpActionsTest/CSharpActionsTest.csproj -c Release -o win-x64 --nologo --self-contained -r win-x64
+        dotnet publish CSharpActionsTest/CSharpActionsTest.csproj -c Release -o linux-x64 --nologo --self-contained -r linux-x64
+        dotnet publish CSharpActionsTest/CSharpActionsTest.csproj -c Release -o osx-x64 --nologo --self-contained -r osx-x64
+    - name: Upload Windows build
       uses: actions/upload-artifact@v4
       with:
         name: CSharpActionsTest
-        path: /home/runner/work/CSharpActionsTest/CSharpActionsTest/release/
+        path: /home/runner/work/CSharpActionsTest/CSharpActionsTest/win-x64/
+    - name: Upload Linux build
+      uses: actions/upload-artifact@v4
+      with:
+        name: CSharpActionsTest
+        path: /home/runner/work/CSharpActionsTest/CSharpActionsTest/linux-x64/
+    - name: Upload OSX build
+      uses: actions/upload-artifact@v4
+      with:
+        name: CSharpActionsTest
+        path: /home/runner/work/CSharpActionsTest/CSharpActionsTest/osx-x64/
