@@ -27,7 +27,10 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish
-      run: dotnet publish CSharpActionsTest/CSharpActionsTest.csproj -c Release -o release --nologo
+      run: |
+        dotnet publish CSharpActionsTest/CSharpActionsTest.csproj -c Release -o release --nologo --self-contained -r win-x64
+        dotnet publish CSharpActionsTest/CSharpActionsTest.csproj -c Release -o release --nologo --self-contained -r linux-x64
+        dotnet publish CSharpActionsTest/CSharpActionsTest.csproj -c Release -o release --nologo --self-contained -r osx-x64
     - name: Upload build
       uses: actions/upload-artifact@v4
       with:
